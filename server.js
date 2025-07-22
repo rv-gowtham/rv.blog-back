@@ -36,6 +36,10 @@ app.get("/recipes/:id", async (req, res) => {
   }
 });
 
+app.get("/", (req, res) => {
+  res.json({ message: "hello" });
+});
+
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });
