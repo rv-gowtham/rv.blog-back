@@ -36,7 +36,7 @@ app.get("/recipes/:id", async (req, res) => {
   }
 });
 
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
   res.json({ message: "hello" });
 });
 
