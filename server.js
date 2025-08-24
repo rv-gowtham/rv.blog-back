@@ -1,9 +1,7 @@
 const express = require("express");
-const dotenv = require("dotenv").config();
+require("dotenv").config();
 const cors = require("cors");
-const mongoose = require("mongoose");
 const connectDB = require("./config/connectiondb");
-const Recipe = require("./models/recipe");
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -17,26 +15,7 @@ connectDB();
 app.use("/", require("./routes/user"));
 app.use("/recipes", require("./routes/recipe"));
 
-app.get("/recipes", async (req, res) => {
-  try {
-    const recipes = await Recipe.find();
-    res.json(recipes);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-app.get("/recipes/:id", async (req, res) => {
-  try {
-    const recipe = await Recipe.findById(req.params.id);
-    if (!recipe) return res.status(404).json({ error: "Recipe not found" });
-    res.json(recipe);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-app.get("/api", (req, res) => {
+app.get("/", (req, res) => {
   res.json({ message: "hello" });
 });
 
